@@ -2,4 +2,6 @@
 !/.bash_logout
 !/.bash_profile
 !/.bashrc
+!/.bashrc.d
+!/.bashrc.d/*.sh
 !/.gitignore
