@@ -1,0 +1,7 @@
+alias c=cd
+alias cl=clear
+alias b=exit
+alias v=nvim
+alias g=git
+alias gst="git status"
+alias gca="git add . && git commit -m"
