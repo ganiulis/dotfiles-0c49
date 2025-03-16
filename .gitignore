@@ -3,8 +3,8 @@
 !/.bash_profile
 !/.bashrc
 !/.bashrc.d
-!/.bashrc.d/*.sh
+!/.bashrc.d/**
 !/.config
 !/.config/nvim
-!/.config/nvim/*
+!/.config/nvim/**
 !/.gitignore
