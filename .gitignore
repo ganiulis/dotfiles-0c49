@@ -4,4 +4,7 @@
 !/.bashrc
 !/.bashrc.d
 !/.bashrc.d/*.sh
+!/.config
+!/.config/nvim
+!/.config/nvim/*
 !/.gitignore
