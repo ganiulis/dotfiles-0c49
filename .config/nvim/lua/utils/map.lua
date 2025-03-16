@@ -1,4 +1,10 @@
-return function(key, func, desc)
-  if desc then desc = "(Custom) " .. desc end
-  vim.keymap.set("n", key, func, { noremap = true, silent = true, desc = desc })
+return function(group)
+  return function(input)
+    local config = {
+      noremap = true,
+      silent = true,
+      desc = "(" .. group .. ") " .. input.desc,
+    }
+    vim.keymap.set(input.mode or "n", input.key, input.func, config)
+  end
 end
