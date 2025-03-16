@@ -3,7 +3,7 @@ return {
   version = "*",
   lazy = false,
   dependencies = {
-	'DaikyXendo/nvim-material-icon',
+    "DaikyXendo/nvim-material-icon",
   },
   config = function(_, opts)
     require("nvim-tree").setup(opts)
