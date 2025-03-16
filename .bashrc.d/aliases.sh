@@ -5,3 +5,4 @@ alias v=nvim
 alias g=git
 alias gst="git status"
 alias gca="git add . && git commit -m"
+alias la="ls -la"
