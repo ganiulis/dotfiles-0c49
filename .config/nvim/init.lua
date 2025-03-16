@@ -23,6 +23,22 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-vim.keymap.set("n", ";", ":", { desc = "(Custom) Enter command mode" })
-vim.keymap.set("n", "<C-_>", "gcc<bar>j", { desc = "(Custom) Toggle comment", remap = true })
-vim.keymap.set("v", "<C-_>", "gc", { desc = "(Custom) Toggle comment", remap = true })
+local map = require("utils.map")("custom")
+map({
+  key = ";",
+  action = ":",
+  desc = "Enter command mode",
+})
+map({
+  key = "<C-_>",
+  action = "gcc<bar>j",
+  desc = "Toggle comment",
+  remap = true,
+})
+map({
+  mode = "v",
+  key = "<C-_>",
+  action = "gc",
+  desc = "Toggle comment",
+  remap = true,
+})
