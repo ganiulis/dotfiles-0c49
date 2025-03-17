@@ -1,7 +1,7 @@
 return function(group)
   return function(input)
     local config = {
-      desc = "(" .. group .. ") " .. input.desc,
+      desc = "[" .. group .. "] " .. input.desc,
       remap = input.remap,
       noremap = input.noremap,
       silent = input.silent,

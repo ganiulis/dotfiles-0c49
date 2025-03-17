@@ -23,7 +23,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-local map = require("utils.map")("custom")
+local map = require("utils.map")("Custom")
 map({
   key = ";",
   action = ":",
