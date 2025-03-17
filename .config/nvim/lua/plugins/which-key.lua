@@ -4,7 +4,7 @@ return {
   keys = {
     {
       "<leader>?",
-      function() require("which-key").show({ global = false }) end,
+      function() require("which-key").show({ global = true }) end,
       desc = "(which-key) Buffer local keymaps",
     },
   },
