@@ -8,6 +8,7 @@ return {
       "prettier",
       "stylua",
       "lua-language-server",
+      "marksman",
     },
     auto_update = true,
     start_delay = 3000,
