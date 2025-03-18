@@ -3,7 +3,7 @@ return {
   version = "*",
   lazy = false,
   dependencies = {
-    "DaikyXendo/nvim-material-icon",
+    "nvim-tree/nvim-web-devicons",
   },
   config = function(_, opts)
     local plugin = "nvim-tree"
