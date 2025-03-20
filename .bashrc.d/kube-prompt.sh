@@ -15,5 +15,5 @@ __kube_ps1()
 		exit 1
 	fi
 
-	echo " \e[36m${CTX}: ${NS}\e[m"
+	echo " \e[36m${CTX} (${NS})\e[m"
 }
