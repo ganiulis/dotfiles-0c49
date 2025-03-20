@@ -1,19 +1,19 @@
-local map = require("utils.map")("Custom")
+local map = require("utils.map")("custom")
 map({
+  desc = "Enter command mode",
   key = ";",
   action = ":",
-  desc = "Enter command mode",
 })
 map({
+  desc = "Toggle comment",
   key = "<C-_>",
   action = "gcc<bar>j",
-  desc = "Toggle comment",
   remap = true,
 })
 map({
-  mode = "v",
+  desc = "Toggle comment",
+  mode = "n",
   key = "<C-_>",
   action = "gc",
-  desc = "Toggle comment",
   remap = true,
 })

@@ -25,29 +25,29 @@ return {
       lsp_signature.on_attach({}, bufnr)
       local map = require("utils.map")("lsp")
       map({
+        desc = "Rename",
         key = "<leader>rn",
         action = vim.lsp.buf.rename,
-        desc = "Rename",
       })
       map({
+        desc = "Code action",
         key = "<leader>ca",
         action = vim.lsp.buf.code_action,
-        desc = "Code action",
       })
       map({
+        desc = "Go to definition",
         key = "gd",
         action = vim.lsp.buf.definition,
-        desc = "Go to definition",
       })
       map({
+        desc = "Find references",
         key = "gr",
         action = telescope_builtin.lsp_references,
-        desc = "Find references",
       })
       map({
+        desc = "Go to implementation",
         key = "gi",
         action = telescope_builtin.lsp_implementations,
-        desc = "Go to implementation",
       })
     end
     local lspconfig = require("lspconfig")
