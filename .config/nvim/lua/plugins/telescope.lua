@@ -9,22 +9,22 @@ return {
     local builtin = require("telescope.builtin")
     map({
       desc = "Search for files",
-      key = "<leader>ff",
+      key = "<leader>tf",
       action = builtin.find_files,
     })
     map({
       desc = "Search for words",
-      key = "<leader>fw",
+      key = "<leader>tw",
       action = builtin.live_grep,
     })
     map({
       desc = "Search for buffers",
-      key = "<leader>fb",
+      key = "<leader>tb",
       action = builtin.buffers,
     })
     map({
       desc = "Search help",
-      key = "<leader>fh",
+      key = "<leader>th",
       action = builtin.help_tags,
     })
   end,
