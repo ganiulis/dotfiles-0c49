@@ -1,4 +1,6 @@
+---@param group string
 return function(group)
+  ---@param input { mode: string, key: string, action: function | string, desc: string, remap: boolean, noremap: boolean, silent: boolean }
   return function(input)
     local config = {
       desc = "[" .. group .. "] " .. input.desc,
