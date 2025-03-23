@@ -4,16 +4,5 @@ map({
   key = ";",
   action = ":",
 })
-map({
-  desc = "Toggle comment",
-  key = "<C-_>",
-  action = "gcc<bar>j",
-  remap = true,
-})
-map({
-  desc = "Toggle comment",
-  mode = "n",
-  key = "<C-_>",
-  action = "gc",
-  remap = true,
-})
+vim.keymap.set("v", "<C-_>", "gc", { remap = true })
+vim.keymap.set("n", "<C-_>", "gcc<bar>j", { remap = true })
