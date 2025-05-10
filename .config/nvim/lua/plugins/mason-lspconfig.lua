@@ -13,9 +13,15 @@ return {
     "hrsh7th/cmp-vsnip",
     "hrsh7th/vim-vsnip",
   },
-  config = function()
-    require("mason").setup()
-    require("mason-lspconfig").setup()
+  opts = {
+    ensure_installed = {
+      "prettier",
+      "stylua",
+      "lua-language-server",
+      "marksman",
+    },
+  },
+  config = function(_, opts)
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
     local lsp_signature = require("lsp_signature")
     local telescope_builtin = require("telescope.builtin")
@@ -23,6 +29,7 @@ return {
       vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
       if client.server_capabilities.inlayHintProvider then vim.lsp.inlay_hint.enable(true) end
       lsp_signature.on_attach({}, bufnr)
+
       local map = require("utils.map")("lsp")
       map({
         desc = "Rename",
@@ -50,50 +57,55 @@ return {
         action = telescope_builtin.lsp_implementations,
       })
     end
+
     local lspconfig = require("lspconfig")
-    require("mason-lspconfig").setup_handlers({
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-        })
-      end,
-      ["lua_ls"] = function()
-        lspconfig.lua_ls.setup({
-          capabilities = capabilities,
-          on_attach = on_attach,
-          on_init = function(client)
-            if client.workspace_folders then
-              local path = client.workspace_folders[1].name
-              if
-                path ~= vim.fn.stdpath("config")
-                and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
-              then
-                return
-              end
-            end
-            client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-              runtime = {
-                version = "LuaJIT",
-              },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                  "${3rd}/luv/library",
-                },
-              },
-            })
-          end,
-          settings = {
-            Lua = {
-              telemetry = {
-                enable = false,
-              },
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      on_init = function(client)
+        if client.workspace_folders then
+          local path = client.workspace_folders[1].name
+          if
+            path ~= vim.fn.stdpath("config")
+            and (vim.loop.fs_stat(path .. "/.luarc.json") or vim.loop.fs_stat(path .. "/.luarc.jsonc"))
+          then
+            return
+          end
+        end
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+          runtime = {
+            version = "LuaJIT",
+          },
+          workspace = {
+            checkThirdParty = false,
+            library = {
+              vim.env.VIMRUNTIME,
+              "${3rd}/luv/library",
             },
           },
         })
       end,
+      settings = {
+        Lua = {
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
     })
+    lspconfig.marksman.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+
+    require("mason").setup()
+    require("mason-lspconfig").setup({
+      automatic_enable = false, -- Enable after Neovim is updated to 0.11.
+    })
+
+    vim.api.nvim_create_user_command("MasonInstallAll", function()
+      local packages = table.concat(opts.ensure_installed, " ")
+      vim.cmd("MasonInstall " .. packages)
+    end, {})
   end,
 }
