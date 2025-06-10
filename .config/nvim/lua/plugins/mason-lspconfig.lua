@@ -99,9 +99,7 @@ return {
     })
 
     require("mason").setup()
-    require("mason-lspconfig").setup({
-      automatic_enable = false, -- Enable after Neovim is updated to 0.11.
-    })
+    require("mason-lspconfig").setup()
 
     vim.api.nvim_create_user_command("MasonInstallAll", function()
       local packages = table.concat(opts.ensure_installed, " ")
