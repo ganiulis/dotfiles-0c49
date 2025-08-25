@@ -13,8 +13,8 @@ function __dotfiles_check_cmd
         if count $argv[4] >/dev/null
             set_color -d blue
             echo -n ' ('($argv[1] $argv[4])')'
+            set_color normal
         end
-        set_color normal
         echo
         return
     end
