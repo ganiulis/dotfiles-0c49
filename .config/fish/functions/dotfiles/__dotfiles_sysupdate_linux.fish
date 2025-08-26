@@ -10,5 +10,12 @@ function __dotfiles_sysupdate_linux
 	return
     end
 
+    # See https://wiki.debian.org/Apt.
+    if type -q apt
+        sudo apt update -y
+	sudo apt full-upgrade -y --autoremove
+	return
+    end
+
     echo "Could not discover supported package manager"
 end
