@@ -58,8 +58,7 @@ return {
       })
     end
 
-    local lspconfig = require("lspconfig")
-    lspconfig.lua_ls.setup({
+    vim.lsp.config("lua_ls", {
       capabilities = capabilities,
       on_attach = on_attach,
       on_init = function(client)
@@ -93,7 +92,7 @@ return {
         },
       },
     })
-    lspconfig.marksman.setup({
+    vim.lsp.config("marksman", {
       on_attach = on_attach,
       capabilities = capabilities,
     })
