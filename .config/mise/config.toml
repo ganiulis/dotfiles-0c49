@@ -1,3 +1,4 @@
 [tools]
 node = "latest"
+ripgrep = "latest"
 zig = "latest"

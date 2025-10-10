@@ -7,3 +7,7 @@ end
 if test -x $HOME/.local/bin/mise
     mise activate fish | source
 end
+
+if test -x $HOME/.local/bin/starship
+    starship init fish | source
+end

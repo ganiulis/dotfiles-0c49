@@ -1,4 +1,4 @@
-function __dotfiles_sysupdate_linux
+function __self-upgrade_linux
     if not type -q sudo
         echo 'Need elevated privileges—`sudo` is missing'
         return

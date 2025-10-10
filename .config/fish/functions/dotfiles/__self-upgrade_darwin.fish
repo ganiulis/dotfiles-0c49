@@ -1,4 +1,4 @@
-function __dotfiles_sysupdate_darwin
+function __self-upgrade_darwin
     if not type -q brew
         echo 'Missing brew. Visit https://brew.sh.'
         return
