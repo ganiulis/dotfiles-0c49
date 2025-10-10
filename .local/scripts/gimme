@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+gimme_version="0.0.1"
+first_argument=$1
+
+if [[ $first_argument == "" ]] || [[ $first_argument == "help" ]]; then
+	printf "gimme %s\n\n" "$gimme_version"
+	printf "The blazingly stupid rootless package manager.\n"
+	printf "Packages are installed in the user's home directory instead of the root filesystem.\n\n"
+	printf "Usage:\n"
+	printf "   gimme help         -> print this\n"
+	printf "   gimme list         -> list available packages\n"
+	printf "   gimme package_name -> (try to) install package\n"
+	printf "   gimme version      -> show version info\n"
+elif [[ $first_argument == "gimme" ]]; then
+	printf "gimme: i'm already here\n"
+elif [[ $first_argument == "list" ]]; then
+	printf "mise-en-place (alias: mise) -> Development metatools (https://github.com/jdx/mise)\n"
+	printf "neovim (alias: nvim)        -> Neovim                (https://github.com/neovim/neovim)\n"
+	printf "nvm                         -> Node Version Manager  (https://github.com/nvm-sh/nvm)\n"
+	printf "starship                    -> Cross-shell prompt    (https://starship.rs)\n"
+elif [[ $first_argument == "version" ]]; then
+	printf "gimme: i am %s years old\n" "$gimme_version"
+elif [[ $first_argument == "neovim" ]] || [[ $first_argument == "nvim" ]]; then
+	if [ -f "$HOME/.local/bin/nvim" ]; then
+		current_version="$(nvim --version | grep -Po '(v\d+\.\d+\.\d+)')"
+		current_hash="$(git ls-remote --tags git@github.com:neovim/neovim.git refs/tags/stable | cut -f 1)"
+		remote_hash="$(git ls-remote --tags git@github.com:neovim/neovim.git refs/tags/"$current_version"^{} | cut -f 1)"
+
+		if [[ "$current_hash" == "$remote_hash" ]]; then
+			nvim_needs_installation=0
+		else
+			nvim_needs_installation=1
+		fi
+	else
+		nvim_needs_installation=1
+	fi
+
+	if [[ $nvim_needs_installation == 1 ]]; then
+		wget --directory-prefix=/tmp/ https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.tar.gz
+		tar -xzvf /tmp/nvim-linux-x86_64.tar.gz -C /tmp
+		rm /tmp/nvim-linux-x86_64.tar.gz
+		cp --recursive --preserve=mode,timestamps /tmp/nvim-linux-x86_64/* "$HOME/.local"
+		rm -r /tmp/nvim-linux-x86_64
+	else
+		printf "gimme: Neovim %s is at the latest stable release\n" "$current_version"
+	fi
+
+	unset current_version
+	unset current_hash
+	unset remote_hash
+	unset nvim_needs_installation
+elif [[ $first_argument == "nvm" ]]; then
+	current_hash="missing"
+	remote_commit=$(git ls-remote --tags --sort='-v:refname' git@github.com:nvm-sh/nvm.git | head -n 1)
+	remote_tag=$(echo "$remote_commit" | grep -Po 'v\d+\.\d+\.\d+')
+	remote_hash=$(echo "$remote_commit" | cut -f 1)
+
+	if [[ -s "$NVM_DIR/.git/HEAD" ]]; then
+		current_hash="$(<"$NVM_DIR"/.git/HEAD)"
+	fi
+
+	if [[ "$current_hash" == "missing" ]]; then
+		wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/"$remote_hash"/install.sh | PROFILE=/dev/null bash
+	elif [[ "$current_hash" != "$remote_hash" ]]; then
+		(
+			cd "$NVM_DIR" || exit
+			git fetch origin --no-tags --depth=1 tag "$remote_tag"
+			git checkout "$remote_tag"
+		)
+	else
+		printf "gimme: Node Version Manager %s is at the latest tagged release\n" "$remote_tag"
+	fi
+
+	unset current_hash
+	unset remote_commit
+	unset remote_tag
+	unset remote_hash
+elif [[ $first_argument == "mise" ]] || [[ $first_argument == "mise-en-place" ]]; then
+	if [[ -x "$HOME/.local/bin/mise" ]]; then
+		printf "gimme: mise-en-place is already installed\n"
+	else
+		curl https://mise.run | sh
+	fi
+elif [[ $first_argument == "starship" ]]; then
+	curl -sS https://starship.rs/install.sh | sh -s -- -b "$HOME"/.local/bin
+else
+	printf "gimme: i don't know what '%s' is\n" "$first_argument"
+fi
+
+unset gimme_version
+unset first_argument

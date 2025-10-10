@@ -1,12 +1,9 @@
 return {
   "stevearc/conform.nvim",
-  dependencies = {
-    "williamboman/mason.nvim",
-  },
   opts = {
     formatters_by_ft = {
-      lua = { "stylua" },
-      markdown = { "prettier" },
+      lua = { "stylua" }, -- Needs `stylua`
+      markdown = { "prettier" }, -- Needs `prettier`
     },
     format_on_save = {
       timeout_ms = 500,

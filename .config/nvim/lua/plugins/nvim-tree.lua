@@ -1,19 +1,23 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  opts = {
-    sort = {
-      sorter = "case_sensitive",
-    },
-  },
-  config = function(_, opts)
-    local plugin = "nvim-tree"
-    require(plugin).setup(opts)
-    local map = require("utils.map")(plugin)
+  config = function()
+    require("nvim-tree").setup({
+      sort = {
+        sorter = "case_sensitive",
+      },
+      view = {
+        width = 30,
+      },
+      renderer = {
+        group_empty = true,
+      },
+    })
+
+    local plugin_api = require("nvim-tree.api")
+    local map = require("map")("nvim-tree")
     map({
       desc = "Focus on file or file explorer",
       key = "<leader>e",
@@ -21,7 +25,7 @@ return {
         if vim.bo.filetype == "NvimTree" then
           vim.cmd("wincmd p")
         else
-          vim.cmd("NvimTreeFocus")
+          plugin_api.tree.focus()
         end
       end,
     })
@@ -32,19 +36,21 @@ return {
         if vim.bo.filetype == "NvimTree" then
           vim.cmd("wincmd p")
         else
-          require("nvim-tree.api").tree.find_file({ open = true, focus = true })
+          plugin_api.tree.find_file({ open = true, focus = true })
         end
       end,
     })
     map({
       desc = "Toggle file explorer",
       key = "<C-n>",
-      action = ":NvimTreeToggle<CR>",
+      action = plugin_api.tree.toggle,
     })
     map({
       desc = "Collapse file explorer",
       key = "<C-c>",
-      action = ":NvimTreeCollapse<CR>",
+      action = plugin_api.tree.collapse_all,
     })
+
+    vim.fn.timer_start(0, function() plugin_api.tree.toggle(false, true) end)
   end,
 }

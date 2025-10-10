@@ -1,0 +1,40 @@
+format = '$time$sudo$username$directory$git_branch$git_commit$git_state$git_metrics$git_status$mise$python$character'
+add_newline = false
+
+[character]
+success_symbol = '[>](white)'
+error_symbol = '[✗](red)'
+
+[container]
+disabled = true
+
+[directory]
+style = 'italic green'
+read_only = ' 🔒'
+format = '[$path]($style)[$read_only]($read_only_style) '
+
+[git_branch]
+style = 'red'
+
+[mise]
+disabled = false
+style = 'yellow'
+format = '[$symbol $health]($style) '
+symbol = '(mise'
+healthy_symbol = 'ok)'
+unhealthy_symbol = 'bad)'
+
+[time]
+disabled = false
+style = 'white'
+format = '[$time]($style) '
+
+[sudo]
+disabled = false
+format = '[$symbol]($style)'
+
+[username]
+disabled = false
+style_user = 'blue'
+format = '[$user]($style) '
+show_always = true
