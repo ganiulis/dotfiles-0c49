@@ -47,7 +47,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.keymap.set("n", ";", ":")
 vim.keymap.set("v", "<C-_>", "gc", { remap = true })
 vim.keymap.set("n", "<C-_>", "gcc<bar>j", { remap = true })
-vim.keymap.del("n", "gcc")
 
 require("lazy").setup({
   spec = {
