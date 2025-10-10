@@ -5,9 +5,18 @@
 !/.bashrc.d
 
 !/.config
-!/.config/**
+/.config/*
+
+!/.config/fish
+/.config/fish/fish_variables
+
+!/.config/mise
+
+!/.config/nvim
 /.config/nvim/lazy-lock.json
 /.config/nvim/lua/plugins/theme.lua
+
+!/.config/starship.toml
 
 !/.gitignore
 
