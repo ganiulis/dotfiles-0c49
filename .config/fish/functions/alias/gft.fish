@@ -1,3 +1,3 @@
 function gft --wraps='git fetch' --description 'git fetch'
-  git fetch $argv
+    git fetch $argv
 end

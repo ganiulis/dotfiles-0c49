@@ -1,3 +1,3 @@
-function n --wraps=npm --description 'npm'
-  npm $argv
+function n --wraps=npm --description npm
+    npm $argv
 end

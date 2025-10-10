@@ -1,3 +1,3 @@
 function kg --wraps='kubectl get' --description 'kubectl get'
-  kubectl get $argv
+    kubectl get $argv
 end

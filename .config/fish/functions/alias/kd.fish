@@ -1,3 +1,3 @@
 function kd --wraps='kubectl describe' --description 'kubectl describe'
-  kubectl describe $argv
+    kubectl describe $argv
 end

@@ -1,3 +1,3 @@
-function k --wraps=kubectl --description 'kubectl'
-  kubectl $argv
+function k --wraps=kubectl --description kubectl
+    kubectl $argv
 end

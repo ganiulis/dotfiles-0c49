@@ -1,3 +1,3 @@
 function c --wraps=cd --description 'Change directory'
-  cd $argv
+    cd $argv
 end

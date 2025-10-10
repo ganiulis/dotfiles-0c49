@@ -1,4 +1,4 @@
-function dotfiles_export_image -d 'Build and export an image'
+function export-docker-image -d 'Build and export an image'
     if not count $argv >/dev/null
         echo 'Missing argument'
         return

@@ -7,14 +7,14 @@ function __self-upgrade_linux
     # See https://wiki.archlinux.org/title/Pacman.
     if type -q pacman
         sudo pacman -Syu
-	return
+        return
     end
 
     # See https://wiki.debian.org/Apt.
     if type -q apt
         sudo apt update -y
-	sudo apt full-upgrade -y --autoremove
-	return
+        sudo apt full-upgrade -y --autoremove
+        return
     end
 
     echo "Could not discover supported package manager"

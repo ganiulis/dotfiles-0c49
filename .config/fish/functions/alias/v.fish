@@ -1,3 +1,3 @@
 function v --wraps=nvim --description 'Neovim text editor'
-  nvim $argv
+    nvim $argv
 end

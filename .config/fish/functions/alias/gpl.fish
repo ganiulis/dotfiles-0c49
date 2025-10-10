@@ -1,3 +1,3 @@
 function gpl --wraps='git pull' --description 'git pull'
-  git pull $argv
+    git pull $argv
 end

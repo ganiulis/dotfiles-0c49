@@ -6,6 +6,7 @@ return {
       "luals", -- Needs `lua-language-server`
       "marksman", -- Needs `marksman` and `libicu74`
       "yamlls", -- Needs `yaml-language-server`
+      "fish_lsp", -- Needs `fish-lsp`
     }
 
     for _, language_server in ipairs(language_servers) do

@@ -1,3 +1,3 @@
-function s --wraps=sudo --description 'sudo'
-  sudo $argv
+function s --wraps=sudo --description sudo
+    sudo $argv
 end

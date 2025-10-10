@@ -3,6 +3,7 @@ return {
   opts = {
     ensure_installed = {
       "bash-language-server",
+      "fish-lsp",
       "lua-language-server",
       "marksman",
       "prettier",
@@ -10,6 +11,7 @@ return {
       "shfmt",
       "stylua",
       "yaml-language-server",
+      "yamlfmt",
     },
   },
   config = function(_, opts)

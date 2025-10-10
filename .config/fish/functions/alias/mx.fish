@@ -1,3 +1,3 @@
 function mx --wraps='make exec' --description 'make exec'
-  make exec $argv
+    make exec $argv
 end
