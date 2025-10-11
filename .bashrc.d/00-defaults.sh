@@ -31,7 +31,5 @@ if ! shopt -oq posix; then
 		. /usr/share/bash-completion/bash_completion
 	elif [ -f /etc/bash_completion ]; then
 		. /etc/bash_completion
-	else
-		echo 'Consider installing the bash-completion package!'
 	fi
 fi

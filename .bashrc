@@ -7,12 +7,10 @@ case $- in
 *) return ;;
 esac
 
-# Source configuration files inside `~/.bashrc.d` directory:
-if [ -d ~/.bashrc.d ]; then
-	for rc in ~/.bashrc.d/*.sh; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
+if [ -d "$HOME/.bashrc.d" ]; then
+	for rc in "$HOME"/.bashrc.d/*.sh; do
+		[ -f "$rc" ] && . "$rc"
 	done
+
 	unset rc
 fi
