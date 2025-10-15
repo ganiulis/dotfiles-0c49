@@ -1,6 +1,10 @@
 # Enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-	test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+if [[ -x /usr/bin/dircolors ]]; then
+	if [[ -d "$HOME"/.dircolors ]]; then
+		eval '$(dircolors -b "$HOME"/.dircolors)'
+	else
+		eval "$(dircolors -b)"
+	fi
 
 	alias ls='ls --color=auto'
 	alias dir='dir --color=auto'
@@ -11,21 +15,23 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Set colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export GCC_COLORS="error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01"
 
-function init_bash_prompt() {
+if [[ -x "$HOME/.local/bin/starship" ]]; then
+	eval "$(starship init bash)"
+else
 	# Make sure to escape all non-printable characters otherwise multi-line inputs won't wrap correctly.
 	# See https://askubuntu.com/questions/24358/how-do-i-get-long-command-lines-to-wrap-to-the-next-line.
-	local red="\[\e[31m\]"
-	local green_italic="\[\e[3;32m\]"
-	local yellow="\[\e[33m\]"
-	local white="\[\e[m\]"
+	red="\[\e[31m\]"
+	green_italic="\[\e[3;32m\]"
+	yellow="\[\e[33m\]"
+	white="\[\e[m\]"
 
 	# Build the prompt
-	local prompt_time="\t"
-	local prompt_user="$red\u$white"
-	local prompt_dir="$green_italic\w$white"
-	local prompt_git=""
+	prompt_time="\t"
+	prompt_user="$red\u$white"
+	prompt_dir="$green_italic\w$white"
+	prompt_git=""
 
 	if [[ -f /usr/lib/git-core/git-sh-prompt ]]; then
 		. /usr/lib/git-core/git-sh-prompt
@@ -33,12 +39,13 @@ function init_bash_prompt() {
 	fi
 
 	export PS1="$prompt_time $prompt_user $prompt_dir$prompt_git > "
-}
 
-if [[ -x "$HOME/.local/bin/starship" ]]; then
-	eval "$(starship init bash)"
-else
-	init_bash_prompt
+	unset red
+	unset green_italic
+	unset yellow
+	unset white
+	unset prompt_time
+	unset prompt_user
+	unset prompt_dir
+	unset prompt_git
 fi
-
-unset -f init_bash_prompt

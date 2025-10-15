@@ -10,11 +10,11 @@ fi
 
 if is_bin_in_path docker; then
 	alias d=docker
-	alias dc='d compose'
+	alias dc="docker compose"
 fi
 
 if is_bin_in_path kubectl; then
 	alias k=kubectl
-	alias kg='k get'
-	alias kd='k describe'
+	alias kg="kubectl get"
+	alias kd="kubectl describe"
 fi
