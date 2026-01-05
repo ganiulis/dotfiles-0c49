@@ -13,8 +13,11 @@ return {
     cmp.setup({
       snippet = {
         expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body)
-          vim.snippet.expand(args.body)
+          if vim.fn["vsnip#available"](1) == 1 then
+            vim.fn["vsnip#expand_or_jump"]()
+          else
+            vim.fn["vsnip#anonymous"](args.body)
+          end
         end,
       },
       preselect = cmp.PreselectMode.None,

@@ -4,6 +4,9 @@ return {
     sync_install = true,
     ensure_installed = {
       "c",
+      "go",
+      "gomod",
+      "gosum",
       "lua",
       "vim",
       "vimdoc",

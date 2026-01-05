@@ -3,6 +3,7 @@ return {
   init = function()
     local language_servers = {
       "bashls", -- Needs `bash-language-server`, `shellcheck`, and `shfmt`
+      "gopls", -- Needs `gopls`
       "luals", -- Needs `lua-language-server`
       "marksman", -- Needs `marksman` and `libicu74`
       "yamlls", -- Needs `yaml-language-server`

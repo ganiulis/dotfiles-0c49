@@ -2,6 +2,8 @@ return {
   "mason-org/mason.nvim",
   opts = {
     ensure_installed = {
+      "gopls",
+      "gofumpt",
       "bash-language-server",
       "fish-lsp",
       "lua-language-server",
