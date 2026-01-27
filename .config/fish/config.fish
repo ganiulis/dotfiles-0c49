@@ -22,4 +22,8 @@ if status is-interactive
     if test -x $HOME/.local/bin/starship
         starship init fish | source
     end
+
+    if test -x go
+        set -gx GOPATH "$HOME/.go"
+    end
 end
