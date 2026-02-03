@@ -6,6 +6,7 @@ return {
       go = { "gofumpt" },
       lua = { "stylua" },
       markdown = { "prettier" },
+      nix = { "nixfmt" },
       yaml = { "yamlfmt" },
     },
     format_on_save = {

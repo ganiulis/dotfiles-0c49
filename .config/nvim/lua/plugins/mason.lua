@@ -16,6 +16,7 @@ return {
       "yamlfmt",
     },
   },
+  enabled = function() return vim.fn.executable("nixos-rebuild") == 0 end,
   config = function(_, opts)
     require("mason").setup(opts)
 

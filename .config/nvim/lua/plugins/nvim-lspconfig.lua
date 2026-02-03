@@ -6,6 +6,7 @@ return {
       "gopls", -- Needs `gopls`
       "luals", -- Needs `lua-language-server`
       "marksman", -- Needs `marksman` and `libicu74`
+      "nixd", -- Needs `nixd`
       "yamlls", -- Needs `yaml-language-server`
       "fish_lsp", -- Needs `fish-lsp`
     }

@@ -15,15 +15,15 @@ if status is-interactive
         set PATH "$HOME/.local/scripts:$PATH"
     end
 
-    if test -x $HOME/.local/bin/mise
-        mise activate fish | source
-    end
-
     if type -q go
         set -gx GOPATH "$HOME/.go"
     end
 
-    if test -x $HOME/.local/bin/starship
+    if type -q mise
+        mise activate fish | source
+    end
+
+    if type -q starship
         starship init fish | source
     end
 end
