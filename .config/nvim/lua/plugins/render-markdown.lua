@@ -10,5 +10,4 @@ return {
     yaml = { enabled = false },
     completions = { lsp = { enabled = true } },
   },
-  config = function(_, opts) require("render-markdown").setup(opts) end,
 }

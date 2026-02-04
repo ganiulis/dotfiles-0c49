@@ -4,12 +4,10 @@ return {
     "nvim-lua/plenary.nvim",
   },
   config = function(_, opts)
-    local plugin_name = "telescope"
-
-    require(plugin_name).setup(opts)
+    require("telescope").setup(opts)
     local builtin = require("telescope.builtin")
 
-    local map = require("map")(plugin_name)
+    local map = require("map")("telescope")
     map({
       desc = "Search for files",
       key = "<leader>tf",
