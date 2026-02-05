@@ -1,4 +1,10 @@
 function __self-upgrade_linux
+    # See https://github.com/nix-community/home-manager
+    if type -q home-manager
+        home-manager switch
+        return
+    end
+
     if not type -q sudo
         echo 'Need elevated privileges—`sudo` is missing'
         return
