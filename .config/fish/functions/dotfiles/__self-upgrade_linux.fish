@@ -4,13 +4,19 @@ function __self-upgrade_linux
         return
     end
 
-    # See https://wiki.archlinux.org/title/Pacman.
+    # See https://nixos.org
+    if type -q nixos-rebuild
+        sudo nixos-rebuild switch
+        return
+    end
+
+    # See https://wiki.archlinux.org/title/Pacman
     if type -q pacman
         sudo pacman -Syu
         return
     end
 
-    # See https://wiki.debian.org/Apt.
+    # See https://wiki.debian.org/Apt
     if type -q apt
         sudo apt update -y
         sudo apt full-upgrade -y --autoremove
